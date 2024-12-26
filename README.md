@@ -5,62 +5,59 @@ Domain: Embedded System
 Duration: December 2024 to January 2025
 Mentor: Codtech Mentor
 
-Overview of the LED Blinking Project
-Objective
-The LED Blinking project is a fundamental exercise in embedded systems programming. It demonstrates how to control hardware (an LED) using software (code written in C). This project helps beginners understand the basics of microcontroller programming, GPIO (General Purpose Input/Output) operations, and the relationship between hardware and software in embedded systems.
 
-Key Concepts
-Microcontroller Basics:
+Project Overview: Real-Time Sensor Data Logging with an STM32 Microcontroller
+This project involves programming an STM32 microcontroller to log sensor data in real time. The logged data can either be stored on an SD card or transmitted wirelessly via a Wi-Fi or Bluetooth module. The project is ideal for applications such as IoT devices, environmental monitoring, or industrial data logging.
 
-The microcontroller (e.g., ATmega328P in Arduino Uno) acts as the "brain" that processes instructions and controls the hardware (LED in this case).
-It has GPIO pins that can be configured as input or output.
-Hardware Interfacing:
+Key Components:
+STM32 Microcontroller
 
-The LED is an output device connected to a GPIO pin.
-Proper interfacing with a resistor prevents overcurrent and ensures safe operation.
-Timing and Control:
+The core of the system, responsible for data acquisition, processing, and communication.
+Example: STM32F4, STM32F1, or STM32H7 series depending on processing requirements.
+Sensors
 
-The code controls the LED by toggling its state (on/off) at regular intervals.
-Timing is implemented using delays (_delay_ms() function in C).
-Hardware Components
-Arduino Uno:
+Could include temperature, humidity, pressure, accelerometer, or other sensors.
+Example: DHT22 (temperature and humidity) or MPU6050 (accelerometer and gyroscope).
+Data Storage (SD Card)
 
-A microcontroller board based on the ATmega328P.
-Provides GPIO pins, power supply, and programming interface.
-LED:
+For local storage of logged data.
+Example: SD card module using SPI interface.
+Wireless Communication Module
 
-A Light Emitting Diode that emits light when powered.
-Resistor (220Ω):
+For remote transmission of data.
+Wi-Fi Example: ESP8266 or ESP32 module.
+Bluetooth Example: HC-05 or BLE module (e.g., nRF52).
+Power Supply
 
-Limits the current flowing through the LED to prevent damage.
-Additional Tools:
+Power the system with a stable supply, either battery or USB-based.
+Workflow:
+Sensor Data Acquisition
 
-Breadboard, jumper wires, and a USB cable for programming and power.
-Software Components
-Programming Language:
+Use STM32 ADC, I2C, or SPI interfaces to collect data from sensors.
+Implement data processing or filtering if needed.
+Data Logging
 
-Code is written in C for low-level hardware control.
-Development Environment:
+Option 1: Store the data locally on an SD card using the SPI protocol.
+Option 2: Send the data wirelessly via Wi-Fi or Bluetooth using UART or SPI.
+Real-Time Operation
 
-AVR-GCC: Compiler for the C program.
-AVRDUDE: Tool for uploading compiled code to the microcontroller.
-Alternatively, the Arduino IDE can be used for simplified programming.
-Core Functions:
+Implement interrupt-driven or DMA-based methods for efficient, real-time data collection.
+Utilize an RTOS (e.g., FreeRTOS) for task scheduling if multiple operations (e.g., data acquisition and communication) need to run concurrently.
+Debugging and Monitoring
 
-_delay_ms() (from <util/delay.h>): Creates delays for LED blinking.
-Register Operations: Direct manipulation of microcontroller registers (DDRB, PORTB) for GPIO control.
-Working Principle
-The microcontroller pin connected to the LED is configured as an output.
-The program turns the LED on by setting the GPIO pin HIGH.
-After a delay, the program turns the LED off by setting the GPIO pin LOW.
-This cycle repeats continuously, making the LED blink at a specific interval.
-Applications
-Learning Tool:
+Use serial debugging (UART) to validate data during development.
+Optional: Implement live data streaming to a PC for monitoring during testing.
+Development Tools:
+Hardware
 
-Introduces fundamental programming concepts like loops, delays, and bit manipulation.
-Provides hands-on experience with hardware control.
-Foundation for Advanced Projects:
-Serves as a base for more complex projects like traffic lights, digital counters, or user-interface devices.
+STM32 Nucleo or Discovery board.
+USB-to-UART adapter (for debugging).
+SD card module and wireless communication module.
+Software
+
+STM32CubeIDE for development and debugging.
+STM32 HAL/LL drivers or CMSIS for peripheral management.
+FreeRTOS (optional) for task management.
 
 
 
