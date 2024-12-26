@@ -1,0 +1,49 @@
+#include "main.h"
+#include "stdio.h"
+#include "string.h"
+#include "sd_card.h" // Custom header for SD card functions
+
+// Define sensor data variables 
+float temperature, humidity, pressure; 
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+  // Read sensor data (replace with your sensor reading functions)
+  temperature = read_temperature_sensor();
+  humidity = read_humidity_sensor();
+  pressure = read_pressure_sensor();
+  
+  // Format data string
+  char data_string[50];
+  sprintf(data_string, "Time: %d, Temp: %.2f, Hum: %.2f, Pres: %.2f\n", HAL_GetTick(), temperature, humidity, pressure); 
+
+  // Choose storage method:
+  // Option 1: Store on SD card
+  if (SD_WriteData(data_string) != SD_SUCCESS) {
+    // Handle SD card write error
+  }
+  
+  // Option 2: Send data over WiFi (assuming you have a WiFi module connected)
+  // Send data using your WiFi library functions
+  // Example: WiFi_SendData(data_string); 
+}
+
+int main(void)
+{
+  // Initialize system clock, GPIO, and peripherals
+  HAL_Init();
+
+  // Configure SD card SPI interface if using SD card
+  if (SD_Init() != SD_SUCCESS) {
+    // Handle SD card initialization error
+  } 
+
+  // Configure Timer to trigger data acquisition at regular intervals
+  HAL_TIM_Base_Start_IT(&htim2); // Assuming htim2 is your timer handle
+
+  while (1) 
+  {
+    // Main loop can be used for other tasks, 
+    // data processing, or user input handling
+  }
+}
